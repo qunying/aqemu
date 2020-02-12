@@ -1921,7 +1921,8 @@ bool Network_Widget::Net_Card_is_Valid()
 	
 	if( u_script && ui.CH_script->isChecked() )
 	{
-		if( ! QFile::exists(ui.Edit_script->text()) )
+		if( QString::compare(ui.Edit_script->text(), "no", Qt::CaseSensitive)
+		    && ! QFile::exists(ui.Edit_script->text()) )
 		{
 			if( No_File_Found("script", ui.Edit_script->text()) )
 			{
@@ -1933,7 +1934,8 @@ bool Network_Widget::Net_Card_is_Valid()
 	
 	if( u_downscript && ui.CH_downscript->isChecked() )
 	{
-		if( ! QFile::exists(ui.Edit_downscript->text()) )
+		if( QString::compare(ui.Edit_downscript->text(), "no", Qt::CaseSensitive)
+		    && !QFile::exists(ui.Edit_downscript->text()) )
 		{
 			if( No_File_Found("downscript", ui.Edit_downscript->text()) )
 			{
@@ -1977,7 +1979,7 @@ bool Network_Widget::Net_Card_is_Valid()
 bool Network_Widget::No_File_Found( const QString &name, const QString &path )
 {
 	int retVal = QMessageBox::critical( this, tr("Error!"),
-										tr("%1 File \"%2\" doesn't Exist! Continue Without this File?").arg(name).arg(path),
+										tr("%1 file \"%2\" doesn't exist! Continue without this file?").arg(name).arg(path),
 										QMessageBox::Yes | QMessageBox::No, QMessageBox::No );
 	
 	if( retVal == QMessageBox::No ) return false;
